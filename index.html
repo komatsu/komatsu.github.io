@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="./css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="./css/tictactoe.css">
+        <script data-main="scripts/main" src="scripts/require.js"></script>
+
+        <!-- 
+            Note: Normally, I would put these template markups in separate template files,
+            and then use requireJS's text.js to import them in. Chrome complains
+            about CORS issues when importing the template file though if you run
+            it locally. Since this is an example app meant to be run locally, I'll
+            the markup inline in the html file.
+        -->
+        <script id="scoreboardTemplate" type="text/html">
+            <div class="row">
+                <div class="col-md-12 col-xs-offset-1">
+                    <h4>Scoreboard</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-xs-offset-1">
+                    <div class="arrow-right <%= oTurnVisibility %>"></div>
+                    <span class="blue bold">O</span> Player 1:
+                </div>
+                <div class="col-xs-3 bold">
+                    <%= oScore %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-xs-offset-1">
+                    <div class="arrow-right <%= xTurnVisibility %>"></div>
+                    <span class="red bold">X</span> CPU:
+                </div>
+                <div class="col-xs-3 bold">
+                    <%= xScore %>
+                </div>
+            </div>
+        </script>
+
+        <script id="gameTemplate" type="text/html">
+            <div class="row">
+                <div class="cell e-game-cell e-cell-0-0" data-row="0" data-col="0"></div>
+                <div class="cell e-game-cell e-cell-0-1" data-row="0" data-col="1"></div>
+                <div class="cell e-game-cell e-cell-0-2" data-row="0" data-col="2"></div>
+            </div>
+            <div class="row">
+                <div class="cell e-game-cell e-cell-1-0" data-row="1" data-col="0"></div>
+                <div class="cell e-game-cell e-cell-1-1" data-row="1" data-col="1"></div>
+                <div class="cell e-game-cell e-cell-1-2" data-row="1" data-col="2"></div>
+            </div>
+            <div class="row">
+                <div class="cell e-game-cell e-cell-2-0" data-row="2" data-col="0"></div>
+                <div class="cell e-game-cell e-cell-2-1" data-row="2" data-col="1"></div>
+                <div class="cell e-game-cell e-cell-2-2" data-row="2" data-col="2"></div>
+            </div>
+            <div class="row">
+                
+                <div class=""><input class="e-reset-btn invisible btn btn-primary" type="button" value="Play Again!"/></div>
+            </div>
+        </script>
+
+        <script id="o-marker" type="text/html">
+            <svg viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="40" stroke="#3366FF" stroke-width="5" fill="transparent"/>
+            </svg>
+        </script>
+
+        <script id="x-marker" type="text/html">
+            <svg viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <line x1="10" x2="90" y1="90" y2="10" stroke="#FF3300" fill="transparent" stroke-width="5"/>
+                <line x1="10" x2="90" y1="10" y2="90" stroke="#FF3300" fill="transparent" stroke-width="5"/>
+            </svg>
+        </script>
+        <!-- end markup templates -->
+
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row margin-top">
+                <div class="col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-10 col-xs-offset-2 vertical-middle">
+                    <div class="e-scoreboard"></div>
+                </div>
+                <div class="col-md-4 col-md-offset-1 col-sm-6 col-sm-offset-1 col-xs-12 vertical-middle">
+                    <div class="e-gameboard game-cells">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

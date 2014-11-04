@@ -1,0 +1,59 @@
+.margin-top {
+    margin-top:15px;
+}
+
+.vertical-middle {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.game-cells {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.cell {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background-color: #99CCFF;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.cell.winner {
+    background-color: #66FF66;
+}
+
+.cell .o-cell, .cell .x-cell {
+    cursor: default;
+}
+
+.red {
+    color: #FF3300;
+}
+
+.blue {
+    color: #3366FF;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.invisible {
+    display: hidden;
+}
+
+.arrow-right {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    bottom: 2px;
+    width: 0; 
+    height: 0; 
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid #99CCFF;
+}
