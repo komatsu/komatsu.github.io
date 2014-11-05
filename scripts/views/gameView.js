@@ -72,6 +72,7 @@ define(
 
                 this.model.getCPUMove(this.model.get("cells"), this.model.cpuPlayer, 0);
                 bestMove = this.model.get("bestMove");
+
                 row = bestMove[0];
                 col = bestMove[1];
 

@@ -75,45 +75,34 @@ define(
                 });
             },
 
-            scoreMove: function(winningSet, player, depth) {
-
-                //Tie
-                if (!winningSet) {
-                    return 0;
-                }
-
-                //Else there's a 3-in-a-row coordinate set
-                //If this is a winning move, give it positive points
-                if (player === this.cpuPlayer) {
-                    return 10 - depth;
-                }
-                //Else if this is a losing move, give it negative points
-                else {
-                    return depth - 10;
-                }
-            },
-
             cloneGameState: function(gameState) {
                 return _.map(gameState, _.clone);
             },
 
-            //Calculate the CPU's move using the minimax algorithm
+            // Calculate the CPU's move using the minimax algorithm
             getCPUMove: function(gameState, player, depth) {
                 var scores = [],
                     moves = [],
-                    winningSet = false,
+                    cpuWinningSet,
+                    humanWinningSet,
                     nextPlayer,
                     newGameState,
                     bestScore,
                     index;
 
-                winningSet = this.getWinningSet(gameState, player);
+                cpuWinningSet = this.getWinningSet(gameState, this.cpuPlayer);
+                humanWinningSet = this.getWinningSet(gameState, this.humanPlayer);
 
-                if (winningSet || this.isGameOver(gameState)) {
-                    return this.scoreMove(winningSet, player, depth);
+                if (cpuWinningSet) {
+                    return 10 - depth; //CPU win = positive score
+                }
+                else if (humanWinningSet) {
+                    return depth - 10; //Human win = negative score
+                }
+                else if (this.isGameOver(gameState)) {
+                    return 0; //Tie game
                 }
 
-                depth++;
                 nextPlayer = (player === this.cpuPlayer) ? this.humanPlayer : this.cpuPlayer;
 
                 for (var row = 0; row < 3; row++) {
@@ -123,17 +112,18 @@ define(
                         }
                         newGameState = this.cloneGameState(gameState);
                         newGameState[row][col] = player;
-                        scores.push(this.getCPUMove(newGameState, nextPlayer, depth));
+                        scores.push(this.getCPUMove(newGameState, nextPlayer, depth + 1));
                         moves.push([row, col]);
                     }
                 }
-                if (player === this.cpuPlayer) {
+
+                if (player === this.cpuPlayer) { //CPU's turn -- maxiimize the score
                     bestScore = Math.max.apply(null, scores);
                     index = scores.indexOf(bestScore);
                     this.set("bestMove", moves[index]);
                     return bestScore;
                 }
-                else {
+                else { //Human's turn -- Get minimum score since we want the human to score least
                     bestScore = Math.min.apply(null, scores);
                     index = scores.indexOf(bestScore);
                     this.set("bestMove", moves[index]);

@@ -16,7 +16,7 @@ define(
             },
 
             changeTurn: function(game) {
--                this.set("currentTurn", game.get("currentTurn"));
+                this.set("currentTurn", game.get("currentTurn"));
              }
         });
 
