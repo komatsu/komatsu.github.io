@@ -44,7 +44,7 @@ define(
                 $target.removeClass("open").append(this.humanMarker);
 
                 //Check game state for win or tie after this move
-                winCells = this.model.getWinningSet(this.model.get("cells"), this.humanPlayer);
+                winCells = this.model.getWinningSet(this.model.get("cells"), this.model.humanPlayer);
 
                 if (winCells) {
                     this.trigger("win", this.model.humanPlayer); //Scoreboard will update on "win" event
